@@ -106,7 +106,7 @@ textarea{
 }
 .ticket-color{
     height:1rem;
-    background-color: #3d3d3d;
+    /* background-color: #3d3d3d; */
 }
 .ticket-id{
     height: 2rem;
@@ -118,3 +118,10 @@ textarea{
     outline: none;
     overflow-wrap: break-word;
 }
+.main-cont{
+    display:flex;
+    gap:2rem;
+    justify-content: center;
+    padding: 2rem;
+    flex-wrap: wrap;
+  }
