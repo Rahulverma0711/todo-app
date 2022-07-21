@@ -60,7 +60,7 @@ function createTicket(ticketcolor,data,ticketId){
     `;
     mainCont.appendChild(ticketCont);
     if(!ticketId){
-        ticketArr.push({ticketcolor,data,ticketid:id});
+        ticketArr.push({ticketcolor,data,ticketId:id});
         
         localStorage.setItem("ticket",JSON.stringify(ticketArr));
      
@@ -71,6 +71,40 @@ function createTicket(ticketcolor,data,ticketId){
 if(localStorage.getItem("ticket")){
     ticketArr=JSON.parse(localStorage.getItem("ticket"));
     ticketArr.forEach(function(ticketObj){
-      createTicket(ticketObj.ticketcolor,ticketObj.data,ticketArr.ticketid);
+      createTicket(ticketObj.ticketcolor,ticketObj.data,ticketObj.ticketId);
+    })
+}
+
+let toolboxColor=document.querySelectorAll(".color");
+for(let i=0;i<toolboxColor.length;i++){
+    toolboxColor[i].addEventListener("click",function(){
+        let selectedColor=toolboxColor[i].classList[0];
+        let filteredTicket=ticketArr.filter(function(ArrayObj){
+            return ArrayObj.ticketcolor==selectedColor;
+        })
+      //remove all the tickets
+      let allticket=document.querySelectorAll(".ticket-cont");
+      for(let i=0;i<allticket.length;i++){
+           allticket[i].remove();
+      }
+      //display filtered tickets 
+      filteredTicket.forEach(function(ticketObj){
+        createTicket(ticketObj.ticketcolor,ticketObj.data,ticketObj.ticketId);
+      })
+
+    })
+
+    toolboxColor[i].addEventListener("dblclick",function(){
+       
+      //remove all the tickets
+      let allticket=document.querySelectorAll(".ticket-cont");
+      for(let i=0;i<allticket.length;i++){
+           allticket[i].remove();
+      }
+      //display filtered tickets 
+       ticketArr.forEach(function(ticketObj){
+        createTicket(ticketObj.ticketcolor,ticketObj.data,ticketObj.ticketId);
+      })
+
     })
 }
